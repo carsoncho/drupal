@@ -52,18 +52,17 @@ before_script:
   # establish elmsln package put in place the right way
   - sudo mkdir -p /var/www
   - sudo chown travis:travis /var/www
-  - drush dl drupal --destination=/var/www --default-major=7 --drupal-project-rename=site1 --y
+  - drush dl drupal --destination=/var/www --default-major=7 --drupal-project-rename=standard --y
   # get drush recipes setup functions
-  - sudo chown -R travis:travis ~/.drush
-  - cd ~/.drush/
-  - git clone https://github.com/drupalprojects/drush_recipes.git
-  - drush cc drush
+#  - sudo chown -R travis:travis ~/.drush
+#  - cd ~/.drush/
+#  - git clone https://github.com/drupalprojects/drush_recipes.git
+#  - drush cc drush
 
 script:
   # run build scripts against site1
-  - cd /var/www/site1
-  - drush site-install minimal --y --db-url=mysql://root@localhost/travisdb --db-su='root' --db-su-pw=''
-  - drush cook http://drush.recipes/sites/default/files/recipes/drecipe_uploads/harmony_everything.drecipe --y
+  - cd /var/www/standard
+  - drush site-install standard --y --db-url=mysql://root@localhost/travisdb --db-su='root' --db-su-pw='' --site-name='Standard'
 # this is where you run a bunch of commands / automated tests for harmony
 after_script:
   - drush status
