@@ -40,7 +40,7 @@ before_install:
 install:
     # install php packages required for running a web server from drush on php 5.3
   - sudo apt-get install -y --force-yes php5-cgi php5-mysql
-
+  - sudo apt-get install -y --force-yes git
   # install drush globally
   - composer global require drush/drush:6.*
 
@@ -52,7 +52,9 @@ before_script:
   # establish elmsln package put in place the right way
   - sudo mkdir -p /var/www
   - sudo chown travis:travis /var/www
-  - drush dl drupal --destination=/var/www --default-major=7 --drupal-project-rename=standard --y
+  - cd /var/www
+  - git clone https://github.com/carsoncho/drupal.git drupal
+#  - drush dl drupal --destination=/var/www --default-major=7 --drupal-project-rename=standard --y
   # get drush recipes setup functions
 #  - sudo chown -R travis:travis ~/.drush
 #  - cd ~/.drush/
@@ -61,7 +63,7 @@ before_script:
 
 script:
   # run build scripts against site1
-  - cd /var/www/standard
+  - cd /var/www/drupal
   - drush site-install standard --y --db-url=mysql://root@localhost/travisdb --db-su='root' --db-su-pw='' --site-name='Standard'
   - composer install 
 # this is where you run a bunch of commands / automated tests for harmony
