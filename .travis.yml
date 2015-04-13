@@ -4,11 +4,11 @@ php:
   - 5.3
   - 5.4
   - 5.5
-  - hhvm
+#  - hhvm
 
 matrix:
   allow-failures:
-    - php: hhvm
+ #   - php: hhvm
 
   env:
     global:
@@ -63,6 +63,7 @@ script:
   # run build scripts against site1
   - cd /var/www/standard
   - drush site-install standard --y --db-url=mysql://root@localhost/travisdb --db-su='root' --db-su-pw='' --site-name='Standard'
+  - composer install 
 # this is where you run a bunch of commands / automated tests for harmony
 after_script:
   - drush status
