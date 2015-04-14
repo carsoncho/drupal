@@ -11,9 +11,8 @@ Feature: User login to Drupal
 #      | Password | ins,ikl9! |
 #    And press "Log in"
 #    Then I should be on "/user"
-#    Given I am logged in as a user with the "administrator" role
 
-  @api
+  @api 
   Scenario: Target links within table rows
     Given I am logged in as a user with the "administrator" role
     When I am at "admin/structure/types"

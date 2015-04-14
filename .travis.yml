@@ -64,12 +64,13 @@ script:
   # run build scripts against our new site
   - cd /var/www/drupal
   - drush site-install standard --y --db-url=mysql://root@localhost/travisdb --db-su='root' --db-su-pw='' --site-name='Standard'
-  - composer config -g github-oauth.github.com 28848ec148a1177357ae9639b77d2b117337100f
-  - composer install 
-  - bin/behat --init
+#  - composer config -g github-oauth.github.com 28848ec148a1177357ae9639b77d2b117337100f
+ # - composer install 
+#  - bin/behat --init
 # this is where you run a bunch of commands / automated tests for harmony
 after_script:
  # - drush status
+  - drush vset clean_url 1
   # run behat tests
   - bin/behat
 notifications:
