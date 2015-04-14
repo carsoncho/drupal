@@ -39,8 +39,7 @@ before_install:
   - composer self-update
 install:
     # install php packages required for running a web server from drush on php 5.3
-  - sudo apt-get install -y --force-yes php5-cgi php5-mysql
-  - sudo apt-get install -y --force-yes git
+  - sudo apt-get install -y --force-yes php5-cgi php5-mysql git
   # install drush globally
   - composer global require drush/drush:6.*
 
@@ -65,6 +64,7 @@ script:
   # run build scripts against site1
   - cd /var/www/drupal
   - drush site-install standard --y --db-url=mysql://root@localhost/travisdb --db-su='root' --db-su-pw='' --site-name='Standard'
+  - composer config -g github-oauth.github.com 28848ec148a1177357ae9639b77d2b117337100f
   - composer install 
 # this is where you run a bunch of commands / automated tests for harmony
 after_script:
