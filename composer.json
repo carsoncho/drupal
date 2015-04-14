@@ -1,6 +1,7 @@
 {
   "require": {
-    "drupal/drupal-extension": "~3.0"
+    "drupal/drupal-extension": "~3.0",
+    "phpunit/phpunit": "*"
   },
   "config": {
     "bin-dir": "bin/"

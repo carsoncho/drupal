@@ -2,7 +2,7 @@ default:
   suites:
     default:
       paths: 
-        features: tests
+        features: 'features'
       contexts:
         - FeatureContext
         - Drupal\DrupalExtension\Context\DrupalContext
@@ -13,11 +13,14 @@ default:
     Behat\MinkExtension:
       goutte: ~
       selenium2: ~
-      base_url: http://behat-test.dev
+      base_url: 127.0.0.1:80
     Drupal\DrupalExtension:
       blackbox: ~
       api_driver: 'drush'
       drush:
-          alias: 'local'
+        alias: 'local'
       drupal:
-          drupal_root: "/Users/coldson/sites/behat-test"
+          drupal_root: "/var/www/drupal"
+#      text:
+#         username_field: 'name'
+#         password_field: 'pass'

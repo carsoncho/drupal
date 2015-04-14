@@ -69,7 +69,7 @@ script:
   - bin/behat --init
 # this is where you run a bunch of commands / automated tests for harmony
 after_script:
-  - drush status
+ # - drush status
   # run behat tests
   - bin/behat
 notifications:
