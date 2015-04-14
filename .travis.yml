@@ -53,6 +53,9 @@ before_script:
   - sudo chown travis:travis /var/www
   - cd /var/www
   - git clone https://github.com/carsoncho/drupal.git drupal
+  - wget http://selenium-release.storage.googleapis.com/2.45/selenium-server-standalone-2.45.0.jar
+  - java -jar selenium-server-standalone-2.45.0.jar > /dev/null &
+  - sleep 5
 #  - drush dl drupal --destination=/var/www --default-major=7 --drupal-project-rename=standard --y
   # get drush recipes setup functions
 #  - sudo chown -R travis:travis ~/.drush
