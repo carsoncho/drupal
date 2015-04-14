@@ -1,0 +1,23 @@
+default:
+  suites:
+    default:
+      paths: 
+        features: tests
+      contexts:
+        - FeatureContext
+        - Drupal\DrupalExtension\Context\DrupalContext
+        - Drupal\DrupalExtension\Context\MinkContext
+        - Drupal\DrupalExtension\Context\MessageContext
+        - Drupal\DrupalExtension\Context\DrushContext
+  extensions:
+    Behat\MinkExtension:
+      goutte: ~
+      selenium2: ~
+      base_url: http://behat-test.dev
+    Drupal\DrupalExtension:
+      blackbox: ~
+      api_driver: 'drush'
+      drush:
+          alias: 'local'
+      drupal:
+          drupal_root: "/Users/coldson/sites/behat-test"

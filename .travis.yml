@@ -32,7 +32,7 @@ mysql:
 before_install:
   - export UPDATE TRAVIS_BUILD_DIR
   - BUILD_TOP=`dirname $TRAVIS_BUILD_DIR`
-  - EXIT_VALUE=0
+  - EXIT_VALUE='It worked!'
 
   - sudo apt-get update > /dev/null
 
@@ -61,15 +61,17 @@ before_script:
 #  - drush cc drush
 
 script:
-  # run build scripts against site1
+  # run build scripts against our new site
   - cd /var/www/drupal
   - drush site-install standard --y --db-url=mysql://root@localhost/travisdb --db-su='root' --db-su-pw='' --site-name='Standard'
   - composer config -g github-oauth.github.com 28848ec148a1177357ae9639b77d2b117337100f
   - composer install 
+  - bin/behat --init
 # this is where you run a bunch of commands / automated tests for harmony
 after_script:
   - drush status
-
+  # run behat tests
+  - bin/behat
 notifications:
   #irc: irc.freenode.org#harmony
 
