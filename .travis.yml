@@ -38,8 +38,6 @@ before_install:
 
   - composer self-update
 install:
-    # install php packages required for running a web server from drush on php 5.3
-  - sudo apt-get install -y --force-yes php5-cgi php5-mysql git
   # install drush globally
   - composer global require drush/drush:6.*
 
@@ -47,32 +45,37 @@ install:
   # see: https://github.com/drush-ops/drush#install---composer
   - export PATH="$HOME/.composer/vendor/bin:$PATH"
 before_script:
-  #- echo 'sendmail_path = /bin/true' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
-  # establish elmsln package put in place the right way
+  # install all nessary things we need to run a headless browser and drupal
+  - sudo apt-get install -y --force-yes apache2 libapache2-mod-php5 php5-curl php5-mysql php5-intl git
+  # leverage Apache’s default VirtualHost, and use sed to stretch it to our needs:
+  - sudo sed -i -e "s,/var/www,$(pwd)/web,g" /etc/apache2/sites-available/default
+  - sudo /etc/init.d/apache2 restart
   - sudo mkdir -p /var/www
   - sudo chown travis:travis /var/www
   - cd /var/www
   - git clone https://github.com/carsoncho/drupal.git drupal
+  # leverage a utility called xvfb, or “X virtual framebuffer”.
+  - sh -e /etc/init.d/xvfb start
+  - export DISPLAY=:99.0
+  # download and get selenium running
   - wget http://selenium-release.storage.googleapis.com/2.45/selenium-server-standalone-2.45.0.jar
   - java -jar selenium-server-standalone-2.45.0.jar > /dev/null &
+  # need to sleep because we have to wait for selenium to start otherwise our behat tests will fail 
   - sleep 5
-#  - drush dl drupal --destination=/var/www --default-major=7 --drupal-project-rename=standard --y
+
   # get drush recipes setup functions
-#  - sudo chown -R travis:travis ~/.drush
-#  - cd ~/.drush/
-#  - git clone https://github.com/drupalprojects/drush_recipes.git
-#  - drush cc drush
+  #  - sudo chown -R travis:travis ~/.drush
+  #  - cd ~/.drush/
+  #  - git clone https://github.com/drupalprojects/drush_recipes.git
+  #  - drush cc drush
 
 script:
   # run build scripts against our new site
   - cd /var/www/drupal
   - drush site-install standard --y --db-url=mysql://root@localhost/travisdb --db-su='root' --db-su-pw='' --site-name='Standard'
-#  - composer config -g github-oauth.github.com 28848ec148a1177357ae9639b77d2b117337100f
- # - composer install 
-#  - bin/behat --init
 # this is where you run a bunch of commands / automated tests for harmony
 after_script:
- # - drush status
+  # Enable Clean urls
   - drush vset clean_url 1
   # run behat tests
   - bin/behat
