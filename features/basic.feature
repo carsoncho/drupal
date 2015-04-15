@@ -11,6 +11,10 @@ Feature: User login to Drupal
 #      | Password | ins,ikl9! |
 #    And press "Log in"
 #    Then I should be on "/user"
+  Scenario: View front page
+    Given I am on the homepage
+    And I am not logged in
+    Then I should see text matching "Welcome to drupal-travis.dev"
 
   @api 
   Scenario: Target links within table rows

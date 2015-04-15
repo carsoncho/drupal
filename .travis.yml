@@ -35,11 +35,11 @@ before_install:
   - EXIT_VALUE='It worked!'
   - sudo apt-get update > /dev/null
   - composer self-update
-  - app/console do:da:cr -e=test > /dev/null
-  - app/console do:sc:cr -e=test > /dev/null
-  - chmod -R 777 app/cache app/logs
-  - app/console --env=test cache:warmup
-  - chmod -R 777 app/cache app/logs
+#  - app/console do:da:cr -e=test > /dev/null
+#  - app/console do:sc:cr -e=test > /dev/null
+#  - chmod -R 777 app/cache app/logs
+#  - app/console --env=test cache:warmup
+#  - chmod -R 777 app/cache app/logs
 install:
   # install drush globally
   - composer global require drush/drush:6.*
