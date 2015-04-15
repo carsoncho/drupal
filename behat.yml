@@ -14,6 +14,7 @@ default:
       goutte: ~
       selenium2: ~
       base_url: 127.0.0.1:80
+     # base_url: http://drupal-travis.dev
     Drupal\DrupalExtension:
       blackbox: ~
       api_driver: 'drush'
@@ -21,6 +22,7 @@ default:
         alias: self
       drupal:
           drupal_root: "/var/www/drupal"
+         # drupal_root: "/Users/coldson/sites/drupal-travis"
 #      text:
 #         username_field: 'name'
 #         password_field: 'pass'
