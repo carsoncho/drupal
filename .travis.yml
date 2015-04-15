@@ -47,7 +47,7 @@ install:
 before_script:
   # install all nessary things we need to run a headless browser and drupal
   - sudo apt-get install -y --force-yes apache2 libapache2-mod-php5 php5-curl php5-mysql php5-intl git
-  # leverage Apache’s default VirtualHost, and use sed to stretch it to our needs:
+  # leverage Apache's default VirtualHost, and use sed to stretch it to our needs:
   - sudo sed -i -e 's,/var/www,$(pwd)/web,g' /etc/apache2/sites-available/default
   - sudo /etc/init.d/apache2 restart
   - sudo mkdir -p /var/www
