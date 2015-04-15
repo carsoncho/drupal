@@ -54,7 +54,7 @@ before_script:
   - sudo chown travis:travis /var/www
   - cd /var/www
   - git clone https://github.com/carsoncho/drupal.git drupal
-  # leverage a utility called xvfb, or “X virtual framebuffer”.
+  # leverage a utility called xvfb, or “X virtual framebuffer”. This is our headless browser
   - sh -e /etc/init.d/xvfb start
   - export DISPLAY=:99.0
   # download and get selenium running
