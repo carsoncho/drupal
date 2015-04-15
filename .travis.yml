@@ -80,6 +80,7 @@ script:
 after_script:
   # Enable Clean urls
   - drush vset clean_url 1
+  - drush cc all
   # run behat tests
   - bin/behat
 notifications:
