@@ -6,23 +6,23 @@ php:
   - 5.5
 #  - hhvm
 
-matrix:
-  allow-failures:
+# matrix:
+ # allow-failures:
  #   - php: hhvm
 
-  env:
-    global:
-      - ES_VER=1.0.1
-      - ES_MAPPER_ATTACHMENTS_VER=2.0.0.RC1
-      - ES_TRANSPORT_THRIFT_VER=2.0.0.RC1
-      - ES_GEOCLUSTER_FACET_VER=0.0.10
-      - ES_WAIT_ON_MAPPING_CHANGE=true
-      - DATABASE='drupal'
-      - DB_USERNAME='root'
-      - DB_ENCODE='utf8'
-    matrix:
-      - DRUPAL_3RD_PARTY='composer_manager'
-      - DRUPAL_3RD_PARTY='libraries'
+env:
+  global:
+    - ES_VER=1.0.1
+    - ES_MAPPER_ATTACHMENTS_VER=2.0.0.RC1
+    - ES_TRANSPORT_THRIFT_VER=2.0.0.RC1
+    - ES_GEOCLUSTER_FACET_VER=0.0.10
+    - ES_WAIT_ON_MAPPING_CHANGE=true
+    - DATABASE='drupal'
+    - DB_USERNAME='root'
+    - DB_ENCODE='utf8'
+   # matrix:
+   #  - DRUPAL_3RD_PARTY='composer_manager'
+   #  - DRUPAL_3RD_PARTY='libraries'
 
 mysql:
   database: $DATABASE
@@ -62,12 +62,11 @@ before_script:
   - java -jar selenium-server-standalone-2.45.0.jar > /dev/null &
   # need to sleep because we have to wait for selenium to start otherwise our behat tests will fail 
   - sleep 5
-
-  # get drush recipes setup functions
-  #  - sudo chown -R travis:travis ~/.drush
-  #  - cd ~/.drush/
-  #  - git clone https://github.com/drupalprojects/drush_recipes.git
-  #  - drush cc drush
+# get drush recipes setup functions
+#  - sudo chown -R travis:travis ~/.drush
+#  - cd ~/.drush/
+#  - git clone https://github.com/drupalprojects/drush_recipes.git
+#  - drush cc drush
 
 script:
   # run build scripts against our new site
