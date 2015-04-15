@@ -18,7 +18,7 @@ default:
       blackbox: ~
       api_driver: 'drush'
       drush:
-        alias: 'local'
+        alias: self
       drupal:
           drupal_root: "/var/www/drupal"
 #      text:
