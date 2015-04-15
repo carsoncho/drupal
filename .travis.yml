@@ -72,6 +72,8 @@ script:
   # run build scripts against our new site
   - cd /var/www/drupal
   - drush site-install standard --y --db-url=mysql://root@localhost/travisdb --db-su='root' --db-su-pw='' --site-name='Standard'
+  - drush dl pathauto
+  - drush en pathauto -y
 # this is where you run a bunch of commands / automated tests for harmony
 after_script:
   # Enable Clean urls
